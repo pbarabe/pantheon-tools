@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [[ -z ${SITE_NAME} ]]; then
+    echo "SITE_NAME must be set"
+    exit 1
+fi
+
+echo "Updating ${SITE_NAME}.live"
+
+terminus env:deploy ${SITE_NAME}.live --updatedb --note="Deploy core and contrib updates"
+terminus env:clear-cache ${SITE_NAME}.live
+

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+#
+# Update script using terminus + drush to apply Arizona Quickstart 2 upstream & Config Distro updates
+#
+
+if [[ -z ${SITE_NAME} ]]; then
+    echo "SITE_NAME must be set"
+    exit 1
+fi
+
+echo "Updating ${SITE_NAME}.dev"
+
+# Clear upstream cache and apply updates
+terminus site:upstream:clear-cache ${SITE_NAME}
+terminus upstream:updates:apply --accept-upstream ${SITE_NAME}.dev
+
+# If AZQS 2, run extra drush steps
+CURRENT_UPSTREAM=$(terminus site:info ${SITE_NAME} --field upstream | sed 's/:.*$//g')
+if [[ "${CURRENT_UPSTREAM}" == "3162cc4c-2f75-40cb-8487-0c69bda99f39" ]]; then
+  terminus drush ${SITE_NAME}.dev -- -n -y updatedb
+  terminus drush ${SITE_NAME}.dev -- -n -y state:set config_sync.update_mode 1 --input-format=integer
+  terminus drush ${SITE_NAME}.dev -- -n -y config-distro-update
+fi
+
