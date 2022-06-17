@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+#
+# Create new pantheon site
+#
+# Defaults:
+#  - org: UA Campus Web Services
+#  - region: United States
+#  - upstream: Arizona Quickstart 2 
+#
+
+if [[ -z ${SITE_NAME} ]]; then
+    echo "SITE_NAME must be set"
+    exit 1
+fi
+
+if [[ -z ${SITE_LABEL} ]]; then
+    SITE_LABEL=${SITE_NAME}
+fi 
+
+if [[ -z ${REGION} ]]; then
+    REGION="us"
+fi 
+
+if [[ -z ${ORG} ]]; then
+    ORG="ua-campus-web-services"
+fi 
+
+if [[ -z ${UPSTREAM} ]]; then
+    UPSTREAM="quickstart-drupal-9-composer-demo"
+fi 
+
+echo "Creating ${SITE_NAME}.dev"
+
+terminus site:create \
+  --region=${REGION} \
+  --org=${ORG} \
+  ${SITE_NAME} \
+  ${SITE_LABEL} \
+  ${UPSTREAM}
+

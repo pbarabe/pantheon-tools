@@ -7,6 +7,11 @@ fi
 
 echo "Updating ${SITE_NAME}.test"
 
-terminus env:deploy ${SITE_NAME}.test --sync-content --updatedb --note="Deploy core and contrib updates, update content from LIVE"
+if [[ -n ${NO_SYNC} ]]; then
+  terminus env:deploy ${SITE_NAME}.test --updatedb --note="Deploy core and contrib updates"
+else
+  terminus env:deploy ${SITE_NAME}.test --sync-content --updatedb --note="Deploy core and contrib updates, update content from LIVE"
+fi
+
 terminus env:clear-cache ${SITE_NAME}.test
 
