@@ -7,6 +7,13 @@ fi
 
 echo "Updating ${SITE_NAME}.live"
 
+terminus backup:create ${SITE_NAME}.live
 terminus env:deploy ${SITE_NAME}.live --updatedb --note="Deploy core and contrib updates"
+
+CURRENT_UPSTREAM=$(terminus site:info ${SITE_NAME} --field upstream | sed 's/:.*$//g')
+if [[ "${CURRENT_UPSTREAM}" == "3162cc4c-2f75-40cb-8487-0c69bda99f39" ]]; then
+  terminus drush ${SITE_NAME}.live -- -n -y config-distro-update
+fi
+
 terminus env:clear-cache ${SITE_NAME}.live
 
