@@ -34,12 +34,12 @@ Execute any one of these scripts against all sites from the command-line:
 
 ```sh
 # Update all dev sites
-terminus site:list --field=name | xargs -I % sh -c 'SITE_NAME=% terminus-update-dev'
+terminus site:list --field=name | sort | xargs -I % sh -c 'SITE_NAME=% terminus-update-dev'
 
 # Update all test sites
-$ terminus site:list --field=name | xargs -I % sh -c 'SITE_NAME=% terminus-update-test'
+$ terminus site:list --field=name | sort | xargs -I % sh -c 'SITE_NAME=% terminus-update-test'
 
 # Update all live sites
-$ terminus site:list --field=name | xargs -I % sh -c 'SITE_NAME=% terminus-update-live'
+$ terminus site:list --field=name | sort | xargs -I % sh -c 'SITE_NAME=% terminus-update-live'
 ```
 
