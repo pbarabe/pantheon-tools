@@ -4,9 +4,10 @@
 
 A few little tools to help simplify site maintainance on [pantheon.io](pantheon.io)
 
+- `terminus-create-site`: Quickly spin up a Quickstart 2 site in Pantheon
 - `terminus-update-dev`: Uses terminus + drush to apply Arizona Quickstart 2 upstream & Config Distro updates
-- `terminus-update-test`: Uses terminus to pull updates from `dev` and clone database and files from `live`
-- `terminus-update-live`: Users terminus to pull updates from `test`
+- `terminus-update-test`: Uses terminus to pull updates from `dev`, apply Config Distro updates, and clone database and files from `live`
+- `terminus-update-live`: Uses terminus to pull updates from `test` and apply Config Distro updates
 
 ## Requirements
 
