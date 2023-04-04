@@ -20,13 +20,13 @@ A few little tools to help simplify site maintainance on [pantheon.io](pantheon.
 
 ```sh
 # Update a dev site
-SITE_NAME=azgrad-mysite terminus-update-dev
+$ SITE_NAME=azgrad-mysite terminus-update-dev
 
 # Update a test site
-SITE_NAME=azgrad-mysite terminus-update-test
+$ SITE_NAME=azgrad-mysite terminus-update-test
 
 # Update a live site
-SITE_NAME=azgrad-mysite terminus-update-live
+$ SITE_NAME=azgrad-mysite terminus-update-live
 ```
 
 ### Update all sites
@@ -35,7 +35,7 @@ Execute any one of these scripts against all sites from the command-line:
 
 ```sh
 # Update all dev sites
-terminus site:list --field=name | sort | xargs -I % sh -c 'SITE_NAME=% terminus-update-dev'
+$ terminus site:list --field=name | sort | xargs -I % sh -c 'SITE_NAME=% terminus-update-dev'
 
 # Update all test sites
 $ terminus site:list --field=name | sort | xargs -I % sh -c 'SITE_NAME=% terminus-update-test'
