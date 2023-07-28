@@ -21,5 +21,6 @@ if [[ "${CURRENT_UPSTREAM}" == "3162cc4c-2f75-40cb-8487-0c69bda99f39" ]]; then
   terminus drush ${SITE_NAME}.dev -- -n -y updatedb
   terminus drush ${SITE_NAME}.dev -- -n -y state:set config_sync.update_mode 1 --input-format=integer
   terminus drush ${SITE_NAME}.dev -- -n -y config-distro-update
+  terminus drush ${SITE_NAME}.dev -- -n -y az-core-config-add-permissions
 fi
 
