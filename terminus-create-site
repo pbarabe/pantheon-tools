@@ -27,7 +27,7 @@ if [[ -z ${ORG} ]]; then
 fi 
 
 if [[ -z ${UPSTREAM} ]]; then
-    UPSTREAM="quickstart-drupal-9-composer-demo"
+    UPSTREAM="3162cc4c-2f75-40cb-8487-0c69bda99f39"
 fi 
 
 echo "Creating ${SITE_NAME}.dev"
