@@ -10,7 +10,7 @@
 #
 
 if [[ -z ${SITE_NAME} ]]; then
-    echo "SITE_NAME must be set"
+    echo -e "\e[31mError: SITE_NAME must be set\e[0m"
     exit 1
 fi
 
@@ -30,7 +30,9 @@ if [[ -z ${UPSTREAM} ]]; then
     UPSTREAM="3162cc4c-2f75-40cb-8487-0c69bda99f39"
 fi 
 
-echo "Creating ${SITE_NAME}.dev"
+echo ""
+echo -e "\e[33;44m---Creating ${SITE_NAME}.dev---\e[0m"
+echo ""
 
 terminus site:create \
   --region=${REGION} \

@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 
 #
-# Update script using terminus + drush to apply Arizona Quickstart 2 upstream & Config Distro updates:
+# Update script using terminus + drush to apply
+# Arizona Quickstart 2 upstream & Config Distro updates:
 # DEV instances
 #
 
 if [[ -z ${SITE_NAME} ]]; then
-    echo "SITE_NAME must be set"
+    echo -e "\e[31mError: SITE_NAME must be set\e[0m"
     exit 1
 fi
 
-echo "Updating ${SITE_NAME}.dev"
+echo ""
+echo -e "\e[33;44m---Updating ${SITE_NAME}.dev---\e[0m"
+echo ""
 
 # Clear upstream cache and apply updates
 terminus site:upstream:clear-cache ${SITE_NAME}

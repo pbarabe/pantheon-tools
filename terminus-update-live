@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 
 #
-# Update script using terminus + drush to apply Arizona Quickstart 2 upstream & Config Distro updates
+# Update script using terminus + drush to apply
+# Arizona Quickstart 2 upstream & Config Distro updates
 # LIVE instances
 #
 
 if [[ -z ${SITE_NAME} ]]; then
-    echo "SITE_NAME must be set"
+    echo -e "\e[31mError: SITE_NAME must be set\e[0m"
     exit 1
 fi
 
-echo "Updating ${SITE_NAME}.live"
+echo ""
+echo -e "\e[33;44m---Updating ${SITE_NAME}.live---\e[0m"
+echo ""
 
 terminus backup:create ${SITE_NAME}.live
 terminus env:deploy ${SITE_NAME}.live --updatedb --note="Deploy core and contrib updates"
