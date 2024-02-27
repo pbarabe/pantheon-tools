@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 
 #
-# Update script using terminus + drush to apply Arizona Quickstart 2 upstream & Config Distro updates
+# Update script using terminus + drush to apply
+# Arizona Quickstart 2 upstream & Config Distro updates
 # TEST instances
 #
 
 if [[ -z ${SITE_NAME} ]]; then
-    echo "SITE_NAME must be set"
+    echo -e "\e[31mError: SITE_NAME must be set\e[0m"
     exit 1
 fi
 
-echo "Updating ${SITE_NAME}.test"
+echo ""
+echo -e "\e[33;44m---Updating ${SITE_NAME}.test---\e[0m"
+echo ""
 
 if [[ -n ${NO_SYNC} ]]; then
   terminus env:deploy ${SITE_NAME}.test --updatedb --note="Deploy core and contrib updates"
