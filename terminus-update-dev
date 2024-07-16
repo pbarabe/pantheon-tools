@@ -15,6 +15,9 @@ echo ""
 echo -e "\e[33;44m---Updating ${SITE_NAME}.dev---\e[0m"
 echo ""
 
+# Create a backup of the dev instance
+terminus backup:create ${SITE_NAME}.dev
+
 # Clear upstream cache and apply updates
 terminus site:upstream:clear-cache ${SITE_NAME}
 terminus upstream:updates:apply --accept-upstream ${SITE_NAME}.dev
@@ -24,7 +27,7 @@ CURRENT_UPSTREAM=$(terminus site:info ${SITE_NAME} --field upstream | sed 's/:.*
 if [[ "${CURRENT_UPSTREAM}" == "3162cc4c-2f75-40cb-8487-0c69bda99f39" ]]; then
   terminus drush ${SITE_NAME}.dev -- -n -y updatedb
   terminus drush ${SITE_NAME}.dev -- -n -y state:set config_sync.update_mode 1 --input-format=integer
-  terminus drush ${SITE_NAME}.dev -- -n -y config-distro-update
+  terminus drush ${SITE_NAME}.dev -- -n -y config-distro-update --update-mode=1
   terminus drush ${SITE_NAME}.dev -- -n -y az-core-config-add-permissions
 fi
 
