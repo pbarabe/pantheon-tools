@@ -15,7 +15,13 @@ echo ""
 echo -e "\e[33;44m---Updating ${SITE_NAME}.live---\e[0m"
 echo ""
 
+# Wake dev site
+terminus env:wake -- ${SITE_NAME}.dev
+
+# Create a backup of the dev instance
 terminus backup:create ${SITE_NAME}.live
+
+# Deploy upstream updates
 terminus env:deploy ${SITE_NAME}.live --updatedb --note="Deploy core and contrib updates"
 
 CURRENT_UPSTREAM=$(terminus site:info ${SITE_NAME} --field upstream | sed 's/:.*$//g')
