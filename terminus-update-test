@@ -16,7 +16,7 @@ echo -e "\e[33;44m---Updating ${SITE_NAME}.test---\e[0m"
 echo ""
 
 # Wake dev site
-terminus env:wake -- ${SITE_NAME}.dev
+terminus env:wake -- ${SITE_NAME}.test
 
 # Create a backup of the test instance
 terminus backup:create ${SITE_NAME}.test
