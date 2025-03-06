@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+#
+# Script to run composer update in Pantheon site DEV environment
+#
+
+if [[ -z ${SITE_NAME} ]]; then
+    echo -e "\e[31mError: SITE_NAME must be set\e[0m"
+    exit 1
+fi
+
+echo ""
+echo -e "\e[33;44m---Running composer update for ${SITE_NAME}.dev---\e[0m"
+echo ""
+
+# Switch site connection to sftp mode
+terminus connection:set ${SITE_NAME}.dev sftp
+
+# Run composer update
+terminus composer ${SITE_NAME}.dev -- update
+
+# Commit changes
+terminus env:commit -- ${SITE_NAME}.dev
+
+# Switch connection mode back to git, clear caches
+terminus connection:set ${SITE_NAME}.dev git \
+  && terminus site:upstream:clear-cache ${SITE_NAME} \
+  && terminus remote:drush -- ${SITE_NAME}.dev cr
+
