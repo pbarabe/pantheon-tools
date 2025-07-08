@@ -23,7 +23,8 @@ terminus backup:create ${SITE_NAME}.dev
 
 # Clear upstream cache and apply updates
 terminus site:upstream:clear-cache ${SITE_NAME}
-terminus upstream:updates:apply --accept-upstream ${SITE_NAME}.dev
+terminus upstream:updates:status ${SITE_NAME}.dev
+terminus upstream:updates:apply --accept-upstream -- ${SITE_NAME}.dev
 
 # If AZQS 2, run extra drush steps
 CURRENT_UPSTREAM=$(terminus site:info ${SITE_NAME} --field upstream | sed 's/:.*$//g')
