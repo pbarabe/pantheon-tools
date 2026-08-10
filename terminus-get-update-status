@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# 
+# Script to check for updates in Pantheon site DEV environments
+#
+# Example usage:
+#
+# 1. Check named site for updates:
+#    terminus-get-update-status mysite
+#  
+# 2. Check named site for updates using environment variable:
+#    SITE_NAME=mysite terminus-get-update-status
+#  
+# 3. Check all sites for updates:
+#    terminus-get-update-status
+#
+
+# check if a site has updates available
+function check_updates() {
+  local site=$1
+  echo "Checking $site..."
+  terminus upstream:updates:status "$site.dev"
+}
+
+# check all sites for updates
+# - wrapper for check_updates
+# - this is used when the script is run w/o
+#   the SITE_NAME environment variable set
+function check_all_sites() {
+  sites=$(terminus site:list --field=name | grep -i 'azgrad\|azs' | sort)
+
+  for site in $sites; do
+    check_updates "$site"
+  done
+}
+
+if [[ ! -z "$SITE_NAME" ]]; then
+  check_updates "$SITE_NAME"
+  exit 0
+elif [[ ! -z "$1" ]]; then
+  check_updates "$1"
+  exit 0
+else
+  check_all_sites
+  exit 0
+fi
+
