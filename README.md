@@ -4,7 +4,9 @@
 
 A few little tools to help simplify site maintainance on [pantheon.io](pantheon.io)
 
+- `terminus-composer-update`: Run `composer update` on a Pantheon DEV site environment
 - `terminus-create-site`: Quickly spin up a Quickstart 3 site in Pantheon
+- `terminus-get-update-status`: Determine whether upstream updates are available for one or all DEV sites
 - `terminus-update-dev`: Uses terminus + drush to apply Arizona Quickstart 3 upstream & Config Distro updates
 - `terminus-update-test`: Uses terminus to pull updates from `dev`, apply Config Distro updates, and clone database and files from `live`
 - `terminus-update-live`: Uses terminus to pull updates from `test` and apply Config Distro updates
